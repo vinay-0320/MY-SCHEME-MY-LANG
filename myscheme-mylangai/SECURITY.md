@@ -1,0 +1,1 @@
+Do not use this preview for sensitive identity documents or production citizen data. Admin access uses a shared development API key. Production requires user accounts, RBAC, TLS, audit logging, rate limiting, secure document processing, retention controls and a security review.

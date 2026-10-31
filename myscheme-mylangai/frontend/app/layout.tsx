@@ -1,0 +1,1 @@
+import "./globals.css";export const metadata={title:"MyScheme MyLangAI",description:"Explore verified Indian government schemes"};export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>}

@@ -1,0 +1,1 @@
+@tailwind base;@tailwind components;@tailwind utilities;body{background:#f5f7fb;color:#18243c}button,input,select,textarea{font:inherit}button:focus-visible,a:focus-visible{outline:3px solid #3b82f6;outline-offset:2px}

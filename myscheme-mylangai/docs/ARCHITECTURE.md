@@ -1,0 +1,1 @@
+Browser (Next.js) → FastAPI → PostgreSQL. FastAPI can call OpenAI, Gemini or Anthropic after explicit user consent. Verified scheme records are the only AI evidence. No automated retrieval, vector index or refresh job is implemented yet.

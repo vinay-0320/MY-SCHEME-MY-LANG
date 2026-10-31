@@ -1,0 +1,38 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: myscheme
+      POSTGRES_PASSWORD: local_dev_only
+      POSTGRES_DB: myscheme
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myscheme"]
+      interval: 5s
+      retries: 10
+  redis:
+    image: redis:7-alpine
+  backend:
+    build: ./backend
+    env_file:
+    - .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://myscheme:local_dev_only@db:5432/myscheme
+      CORS_ORIGINS: http://localhost:3000
+      ADMIN_API_KEY: ${ADMIN_API_KEY:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      AI_PROVIDERS: ${AI_PROVIDERS:-openai,gemini,anthropic}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-2.5-flash}
+    ports: ["8000:8000"]
+    depends_on:
+      db:
+        condition: service_healthy
+  frontend:
+    build: ./frontend
+    ports: ["3000:3000"]
+    depends_on: [backend]
+volumes:
+  dbdata:
